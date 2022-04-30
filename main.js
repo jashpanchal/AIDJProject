@@ -1,5 +1,17 @@
+song1 = "";
+song2 = "";
+
+function preload(){
+    song1 = loadSound("In_da_getto.mp3");
+    song2 = loadSound("Dynamite.mp3")
+}
 function setup(){
-    
-canvas = createCanvas(255,255);
-canvas.position(515,200);
+    canvas = createCanvas(600,500);
+    canvas.center();
+
+    video = createCapture(VIDEO);
+    video.hide();
+}
+function draw(){
+    image(video,0,0,600,500);
 }
