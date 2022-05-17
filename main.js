@@ -10,6 +10,9 @@ rightWristY = 0;
 leftWristscore = 0;
 song1status = "";
 
+rightWristscore = 0;
+song2status = "";
+
 function preload(){
     song1 = loadSound("In_da_getto.mp3");
     song2 = loadSound("Dynamite.mp3");
@@ -29,8 +32,8 @@ function draw(){
     fill("#ff0000");
     stroke("#ff0000");
     song1status = song1.isPlaying();
+    
     if(leftWristscore > 0.2){
-        stroke("#ff0000")
         circle(leftWristX,leftWristY,20);
         song2.stop();
         if(song1status == false){
@@ -38,7 +41,15 @@ function draw(){
             document.getElementById("song_name").innerHTML = "Played song name is In Da Getto";
         }
     }
-
+    song2status = song2.isPlaying();
+    if(rightWristscore > 0.2){
+        circle(rightWristX,rightWristY,20);
+        song1.stop();
+        if(song2status == false){
+            song2.play();
+            document.getElementById("song_name").innerHTML = "Played song name is Dynamite";
+        }
+    }
 }
 
 function modelLoaded(){
@@ -60,5 +71,6 @@ function gotPoses(results){
         console.log("rightWristX = " + rightWristX + ", rightWristY = " + rightWristY);
 
         leftWristscore = results[0].pose.keypoints[9].score;
+        rightWristscore = results[0].pose.keypoints[10].score;
     }
 }
